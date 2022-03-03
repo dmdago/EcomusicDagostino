@@ -1,7 +1,9 @@
 import React from 'react'
-import { AppBar, Button, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Button, Toolbar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import logo from '../imgs/logo.png'
+import logo from '../../imgs/logo.png'
+import CartWidget from '../cart/CartWidget.js';
+
 
 const useStyles = makeStyles((theme) => ({
     logo: {
@@ -32,9 +34,9 @@ const Navbar = () => {
     const classes = useStyles()
     return (
         <div >
-            <AppBar className={classes.abStyles} >
+            <AppBar className={classes.abStyles}>
                 <Toolbar className={classes.toolbar} disableGutters={true}>
-                    <img src={logo} className={classes.logo} />
+                    <img src={logo} alt="EcoMusic" className={classes.logo} />
                     <div>
                         <Button variant='text' color='inherit' className={`${classes.menuOptionSpecial}  ${classes.menuOption}`}>
                             Home
@@ -48,6 +50,9 @@ const Navbar = () => {
                         <Button variant='text' color='inherit' className={classes.menuOption}>
                             Keyboards
                         </Button>
+                    </div>
+                    <div>
+                        <CartWidget />
                     </div>
                     <div>
                         <Button variant='text' color='inherit' className={`${classes.menuOptionSpecial}  ${classes.menuOption}`}>
