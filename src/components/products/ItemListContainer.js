@@ -1,45 +1,118 @@
-import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import Item from "./Item.js";
 import { makeStyles } from "@material-ui/core/styles";
-import musicinst from "../../imgs/electricguitar.png";
-import ItemCount from "./ItemCount.js";
+import Loading from "../misc/Loading.js";
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    maxWidth: "350px",
-    margin: "20px",
+  ItemsContainer: {
+    width: "100%",
+    justifyContent: "center",
+    display: "flex",
   },
-  cardimage: {
-    maxWidth: "90%",
-    margin: "auto",
+  ItemsRow: {
+    width: "calc(390px*3)",
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  box: {
+    flexGrow: 1,
+    display: "flex",
+    height: "50vh",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 
-function ItemListContainer({ greeting }) {
+const productsArray = [
+  {
+    id: "1",
+    name: "Guitar",
+    brand: "Fender",
+    imgUrl: "/imgs/FenderGuitar.png",
+    price: 50,
+    initial: 0,
+    stock: 5,
+  },
+  {
+    id: "2",
+    name: "Bass Guitar",
+    brand: "Gibson",
+    imgUrl: "/imgs/GibsonBass.png",
+    price: 100,
+    initial: 0,
+    stock: 10,
+  },
+  {
+    id: "3",
+    name: "Piano",
+    brand: "Yamaha",
+    imgUrl: "/imgs/YamahaPiano.png",
+    price: 20,
+    initial: 0,
+    stock: 15,
+  },
+  {
+    id: "4",
+    name: "Keyboard",
+    brand: "Casio",
+    imgUrl: "/imgs/CasioKey.png",
+    price: 20,
+    initial: 0,
+    stock: 20,
+  },
+];
+
+function ItemListContainer() {
   const classes = useStyles();
 
-  const addToCart = function (quantity) {
-    if (quantity > 0) {
-      alert(`Se agrego ${quantity} ${greeting} al carrito`);
-    } else {
-      alert("Seleccione una cantidad");
-    }
-  };
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getProducts = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(productsArray);
+      }, 2000);
+    });
+
+    getProducts.then(
+      (res) => {
+        setProducts(res);
+        setLoading(false);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }, []);
+
+  if (loading) {
+    return (
+      <div className={classes.box}>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
-    <Card className={classes.card}>
-      <CardMedia
-        component="img"
-        image={musicinst}
-        className={classes.cardimage}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {greeting}
-        </Typography>
-        <ItemCount stock={5} initial={0} onAdd={addToCart} />
-      </CardContent>
-    </Card>
+    <>
+      <div className={classes.ItemsContainer}>
+        <div className={classes.ItemsRow}>
+          {products.map((product) => (
+            <Item
+              key={product.id}
+              name={product.name}
+              brand={product.brand}
+              imgUrl={product.imgUrl}
+              price={product.price}
+              initial={product.initial}
+              stock={product.stock}
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

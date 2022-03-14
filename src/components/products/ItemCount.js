@@ -47,7 +47,6 @@ const ItemCount = function ({ stock, initial, onAdd }) {
   };
 
   const classes = useStyles();
-
   return (
     <div className={classes.ItemContainer}>
       <div className={classes.ItemCounter}>
