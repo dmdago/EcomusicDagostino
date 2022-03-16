@@ -4,15 +4,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import ItemCount from "./ItemCount.js";
 
 const useStyles = makeStyles((theme) => ({
-  CartButton: {
+  CartButtonDetail: {
     fontSize: "1rem",
     padding: 0,
   },
-  Card: {
-    width: "350px",
+  CardDetail: {
+    width: "75%",
     margin: "20px",
   },
-  CardImage: {
+  CardImageDetail: {
     maxWidth: "90%",
     margin: "auto",
   },
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const Item = function ({
   id,
   category,
+  description,
   stock,
   initial,
   name,
@@ -36,23 +37,28 @@ const Item = function ({
       alert("Seleccione una cantidad");
     }
   };
-
   return (
-    <Card className={classes.Card}>
+    <Card className={classes.CardDetail}>
       <CardMedia
         component="img"
         src={process.env.PUBLIC_URL + imgUrl}
-        className={classes.CardImage}
+        className={classes.CardImageDetail}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          <b>Product:</b> {name}
         </Typography>
         <Typography gutterBottom variant="h6" component="div">
-          {brand}
+          <b>Brand:</b> {brand}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
-          $ {price}
+        <Typography gutterBottom variant="body1" component="div">
+          <b>Category:</b> {category}
+        </Typography>
+        <Typography gutterBottom variant="body1" component="div">
+          <b>Description:</b> {description}
+        </Typography>
+        <Typography gutterBottom variant="body1" component="div">
+          <b>Price: </b> $ {price}
         </Typography>
         <ItemCount stock={stock} initial={initial} onAdd={addToCart} />
       </CardContent>
