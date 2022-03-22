@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail.js";
 import { getProducts } from "../../helpers/getProducts";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   ItemsRow: {
-    width: "calc(390px*3)",
+    width: "40%",
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
@@ -31,17 +32,19 @@ function ItemDetailContainer() {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const { prodId } = useParams();
+
   useEffect(() => {
-    getProducts().then(
-      (res) => {
-        setProduct(res.find((prod) => prod.id === "1"));
-        console.log(product);
-        setLoading(false);
-      },
-      (err) => {
+    getProducts()
+      .then((res) => {
+        setProduct(res.find((prod) => prod.id === Number(prodId)));
+      })
+      .catch((err) => {
         console.log(err);
-      }
-    );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {

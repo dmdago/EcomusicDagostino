@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Item from "./Item.js";
 import { getProducts } from "../../helpers/getProducts";
 import { makeStyles } from "@material-ui/core/styles";
@@ -31,17 +32,24 @@ function ItemListContainer() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const { catId } = useParams();
+
   useEffect(() => {
-    getProducts().then(
-      (res) => {
-        setProducts(res);
-        setLoading(false);
-      },
-      (err) => {
+    getProducts()
+      .then((res) => {
+        if (!catId) {
+          setProducts(res);
+        } else {
+          setProducts(res.filter((prod) => prod.category === catId));
+        }
+      })
+      .catch((err) => {
         console.log(err);
-      }
-    );
-  }, []);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [catId]);
 
   if (loading) {
     return (
@@ -58,6 +66,7 @@ function ItemListContainer() {
           {products.map((product) => (
             <Item
               key={product.id}
+              id={product.id}
               category={product.category}
               name={product.name}
               brand={product.brand}

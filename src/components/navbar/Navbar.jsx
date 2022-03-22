@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AppBar, Button, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../../imgs/logo.png";
@@ -35,12 +36,15 @@ const Navbar = () => {
     <div>
       <AppBar className={classes.abStyles}>
         <Toolbar className={classes.toolbar} disableGutters={true}>
-          <img src={logo} alt="EcoMusic" className={classes.logo} />
+          <Link to="/">
+            <img src={logo} alt="EcoMusic" className={classes.logo} />
+          </Link>
           <div>
             <Button
               variant="text"
               color="inherit"
               className={`${classes.menuOptionSpecial}  ${classes.menuOption}`}
+              href="/"
             >
               Home
             </Button>
@@ -48,6 +52,7 @@ const Navbar = () => {
               variant="text"
               color="inherit"
               className={classes.menuOption}
+              href="/products/guitars"
             >
               Guitars
             </Button>
@@ -55,6 +60,7 @@ const Navbar = () => {
               variant="text"
               color="inherit"
               className={classes.menuOption}
+              href="/products/basses"
             >
               Basses
             </Button>
@@ -62,8 +68,9 @@ const Navbar = () => {
               variant="text"
               color="inherit"
               className={classes.menuOption}
+              href="/products/keys"
             >
-              Keyboards
+              Keys
             </Button>
           </div>
           <div>

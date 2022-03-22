@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   CardDetail: {
-    width: "75%",
+    width: "100%",
     margin: "20px",
   },
   CardImageDetail: {
