@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import Home from "./components/home/Home";
 import ItemListContainer from "./components/products/ItemListContainer";
 import ItemDetailContainer from "./components/products/ItemDetailContainer";
@@ -10,7 +10,7 @@ function App() {
   const greeting = "Welcome to EcoMusic!";
   return (
     <BrowserRouter>
-      <Navbar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home greeting={greeting} />} />
         <Route path="/products/:catId" element={<ItemListContainer />} />
