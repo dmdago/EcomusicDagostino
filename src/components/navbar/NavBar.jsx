@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = () => {
   const classes = useStyles();
+
   return (
     <div>
       <AppBar className={classes.abStyles}>
