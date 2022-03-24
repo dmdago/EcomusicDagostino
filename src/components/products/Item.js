@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ItemCount from "./ItemCount.js";
+import ItemPanel from "./ItemPanel";
 
 const useStyles = makeStyles((theme) => ({
   CartButton: {
@@ -23,6 +29,16 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     "&:hover": {
       textDecoration: "underline",
+    },
+  },
+  ItemCap: {
+    textTransform: "capitalize",
+  },
+  ItemButton: {
+    color: "#FFF",
+    backgroundColor: "#777",
+    "&:hover": {
+      backgroundColor: "#555",
     },
   },
 }));
@@ -63,13 +79,26 @@ const Item = function ({
         >
           {name}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
-          {brand}
+        <Typography
+          gutterBottom
+          variant="body"
+          component="div"
+          className={classes.ItemCap}
+        >
+          {category} - {brand}
         </Typography>
         <Typography gutterBottom variant="h6" component="div">
           $ {price}
         </Typography>
-        <ItemCount stock={stock} initial={initial} onAdd={addToCart} />
+        <Button
+          className={classes.ItemButton}
+          href={`/detail/${id}`}
+          size="small"
+          fullWidth="true"
+        >
+          More details
+        </Button>
+        <ItemPanel stock={stock} initial={initial} onAdd={addToCart} />
       </CardContent>
     </Card>
   );

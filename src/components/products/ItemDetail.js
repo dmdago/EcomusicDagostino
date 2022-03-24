@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ItemCount from "./ItemCount.js";
+import ItemPanel from "./ItemPanel.js";
 
 const useStyles = makeStyles((theme) => ({
   CartButtonDetail: {
@@ -60,7 +60,7 @@ const Item = function ({
         <Typography gutterBottom variant="body1" component="div">
           <b>Price: </b> $ {price}
         </Typography>
-        <ItemCount stock={stock} initial={initial} onAdd={addToCart} />
+        <ItemPanel stock={stock} initial={initial} onAdd={addToCart} />
       </CardContent>
     </Card>
   );
