@@ -81,7 +81,7 @@ const Item = function ({
         </Typography>
         <Typography
           gutterBottom
-          variant="body"
+          variant="h6"
           component="div"
           className={classes.ItemCap}
         >
@@ -94,11 +94,11 @@ const Item = function ({
           className={classes.ItemButton}
           href={`/detail/${id}`}
           size="small"
-          fullWidth="true"
+          fullWidth={true}
         >
           More details
         </Button>
-        <ItemPanel stock={stock} initial={initial} onAdd={addToCart} />
+        <ItemPanel stock={stock} initial={initial} onAdd={addToCart} id={id} />
       </CardContent>
     </Card>
   );

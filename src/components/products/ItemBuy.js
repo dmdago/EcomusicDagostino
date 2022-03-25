@@ -3,6 +3,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { IconButton } from "@material-ui/core";
 import { makeStyles, styled } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
+import { useCartContext } from "../cart/CartContext.js";
 
 const useStyles = makeStyles((theme) => ({
   ItemButton: {
@@ -29,8 +30,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const ItemBuy = function ({ disabled, quantity, onAdd }) {
+const ItemBuy = function ({ id, disabled, quantity, onAdd }) {
   const classes = useStyles();
+  const { addToCart } = useCartContext();
 
   return (
     <div>
@@ -38,7 +40,7 @@ const ItemBuy = function ({ disabled, quantity, onAdd }) {
         size="medium"
         disabled={disabled}
         className={classes.ItemButton}
-        onClick={() => onAdd(quantity)}
+        onClick={() => addToCart(quantity, id)}
       >
         <StyledBadge badgeContent={quantity} color="secondary">
           <ShoppingCartIcon className={classes.CartButton} />

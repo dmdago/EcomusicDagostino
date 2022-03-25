@@ -61,6 +61,7 @@ function ItemDetailContainer() {
         <div className={classes.ItemsRow}>
           <ItemDetail
             key={product.id}
+            id={product.id}
             category={product.category}
             name={product.name}
             description={product.description}

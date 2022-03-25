@@ -4,6 +4,7 @@ import { AppBar, Button, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../../imgs/logo.png";
 import CartWidget from "../cart/CartWidget.js";
+import { CartProvider } from "../cart/CartContext.js";
 
 const useStyles = makeStyles((theme) => ({
   logo: {

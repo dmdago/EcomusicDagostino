@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemPanel = function ({ stock, initial, onAdd }) {
+const ItemPanel = function ({ id, stock, initial, onAdd }) {
   const classes = useStyles();
   const [quantity, setQuantity] = useState(initial);
   const [disable, setDisable] = useState(false);
@@ -42,6 +42,7 @@ const ItemPanel = function ({ stock, initial, onAdd }) {
         onAdd={onAdd}
         quantity={quantity}
         disabled={disable}
+        id={id}
       />
     </div>
   );

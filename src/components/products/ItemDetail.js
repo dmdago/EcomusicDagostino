@@ -60,7 +60,7 @@ const Item = function ({
         <Typography gutterBottom variant="body1" component="div">
           <b>Price: </b> $ {price}
         </Typography>
-        <ItemPanel stock={stock} initial={initial} onAdd={addToCart} />
+        <ItemPanel stock={stock} initial={initial} onAdd={addToCart} id={id} />
       </CardContent>
     </Card>
   );
