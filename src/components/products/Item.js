@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import {
   Button,
   Card,
@@ -54,6 +56,8 @@ const Item = function ({
   price,
 }) {
   const classes = useStyles();
+  const navigate = useNavigate();
+
   const addToCart = function (quantity) {
     if (quantity > 0) {
       alert(`Se agrego ${quantity} ${name} ${brand} al carrito`);
@@ -92,13 +96,21 @@ const Item = function ({
         </Typography>
         <Button
           className={classes.ItemButton}
-          href={`/detail/${id}`}
+          onClick={() => navigate(`/detail/${id}`)}
           size="small"
           fullWidth={true}
         >
           More details
         </Button>
-        <ItemPanel stock={stock} initial={initial} onAdd={addToCart} id={id} />
+        <ItemPanel
+          stock={stock}
+          name={name}
+          brand={brand}
+          price={price}
+          initial={initial}
+          onAdd={addToCart}
+          id={id}
+        />
       </CardContent>
     </Card>
   );

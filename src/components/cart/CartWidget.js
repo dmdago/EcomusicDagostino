@@ -4,6 +4,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { makeStyles, styled } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
 import { useCartContext } from "../../components/cart/CartContext.js";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   CartButton: {
@@ -32,10 +33,18 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 function CartWidget() {
   const classes = useStyles();
   const { items } = useCartContext();
+  const navigate = useNavigate();
+  const totalQty = items.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
 
   return (
-    <IconButton size="medium" className={classes.ItemButton} href="/cart">
-      <StyledBadge badgeContent={items.length} color="secondary">
+    <IconButton
+      size="medium"
+      className={classes.ItemButton}
+      onClick={() => navigate("/cart")}
+    >
+      <StyledBadge badgeContent={totalQty} color="secondary">
         <ShoppingCartIcon className={classes.CartButton} />
       </StyledBadge>
     </IconButton>

@@ -4,7 +4,7 @@ import { AppBar, Button, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../../imgs/logo.png";
 import CartWidget from "../cart/CartWidget.js";
-import { CartProvider } from "../cart/CartContext.js";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -46,7 +47,7 @@ const NavBar = () => {
               variant="text"
               color="inherit"
               className={`${classes.menuOptionSpecial}  ${classes.menuOption}`}
-              href="/"
+              onClick={() => navigate("/")}
             >
               Home
             </Button>
@@ -54,7 +55,7 @@ const NavBar = () => {
               variant="text"
               color="inherit"
               className={classes.menuOption}
-              href="/products/guitars"
+              onClick={() => navigate("/products/guitars")}
             >
               Guitars
             </Button>
@@ -62,7 +63,7 @@ const NavBar = () => {
               variant="text"
               color="inherit"
               className={classes.menuOption}
-              href="/products/basses"
+              onClick={() => navigate("/products/basses")}
             >
               Basses
             </Button>
@@ -70,7 +71,7 @@ const NavBar = () => {
               variant="text"
               color="inherit"
               className={classes.menuOption}
-              href="/products/keys"
+              onClick={() => navigate("/products/keys")}
             >
               Keys
             </Button>

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemPanel = function ({ id, stock, initial, onAdd }) {
+const ItemPanel = function ({ id, stock, name, brand, price, initial, onAdd }) {
   const classes = useStyles();
   const [quantity, setQuantity] = useState(initial);
   const [disable, setDisable] = useState(false);
@@ -40,6 +40,9 @@ const ItemPanel = function ({ id, stock, initial, onAdd }) {
       <ItemBuy
         stock={stock}
         onAdd={onAdd}
+        name={name}
+        brand={brand}
+        price={price}
         quantity={quantity}
         disabled={disable}
         id={id}

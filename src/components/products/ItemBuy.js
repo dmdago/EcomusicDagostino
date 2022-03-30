@@ -30,7 +30,15 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const ItemBuy = function ({ id, disabled, quantity, onAdd }) {
+const ItemBuy = function ({
+  id,
+  name,
+  brand,
+  price,
+  disabled,
+  quantity,
+  onAdd,
+}) {
   const classes = useStyles();
   const { addToCart } = useCartContext();
 
@@ -40,7 +48,7 @@ const ItemBuy = function ({ id, disabled, quantity, onAdd }) {
         size="medium"
         disabled={disabled}
         className={classes.ItemButton}
-        onClick={() => addToCart(quantity, id)}
+        onClick={() => addToCart(id, name, brand, price, quantity)}
       >
         <StyledBadge badgeContent={quantity} color="secondary">
           <ShoppingCartIcon className={classes.CartButton} />
