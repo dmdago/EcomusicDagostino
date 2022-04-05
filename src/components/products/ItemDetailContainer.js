@@ -37,7 +37,7 @@ function ItemDetailContainer() {
   useEffect(() => {
     getProducts()
       .then((res) => {
-        setProduct(res.find((prod) => prod.id === Number(prodId)));
+        setProduct(res.find((prod) => prod.id === prodId));
       })
       .catch((err) => {
         console.log(err);

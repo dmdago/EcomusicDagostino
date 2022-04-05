@@ -6,6 +6,7 @@ import ItemListContainer from "./components/products/ItemListContainer";
 import ItemDetailContainer from "./components/products/ItemDetailContainer";
 import Cart from "./components/cart/Cart";
 import { CartProvider } from "./components/cart/CartContext.js";
+import { FirebaseComponent } from "./components/FirebaseComponent/FirebaseComponent";
 
 function App() {
   const greeting = "Welcome to EcoMusic!";
@@ -18,6 +19,7 @@ function App() {
           <Route path="/products/:catId" element={<ItemListContainer />} />
           <Route path="/detail/:prodId" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/firebase" element={<FirebaseComponent />} />
         </Routes>
       </BrowserRouter>
     </CartProvider>
