@@ -31,7 +31,6 @@ function ItemDetailContainer() {
 
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const { prodId } = useParams();
 
   useEffect(() => {
@@ -45,7 +44,7 @@ function ItemDetailContainer() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [prodId]);
 
   if (loading) {
     return (
