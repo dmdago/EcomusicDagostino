@@ -7,9 +7,9 @@ export const useCartContext = () => useContext(CartContext);
 export const CartProvider = function ({ children }) {
   const [items, setItems] = useState([]);
 
-  const addToCart = function (productId, name, brand, price, quantity) {
+  const addToCart = function (productId, name, brand, price, quantity, imgUrl) {
     if (quantity > 0) {
-      const currentItem = { productId, name, brand, price, quantity };
+      const currentItem = { productId, name, brand, price, quantity, imgUrl };
 
       const foundItem = items.find(
         (o) => o.productId === currentItem.productId

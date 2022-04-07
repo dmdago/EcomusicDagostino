@@ -21,7 +21,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemPanel = function ({ id, stock, name, brand, price, initial, onAdd }) {
+const ItemPanel = function ({
+  id,
+  stock,
+  name,
+  brand,
+  price,
+  initial,
+  imgUrl,
+  onAdd,
+}) {
   const classes = useStyles();
   const [quantity, setQuantity] = useState(initial);
   const [disable, setDisable] = useState(false);
@@ -55,6 +64,7 @@ const ItemPanel = function ({ id, stock, name, brand, price, initial, onAdd }) {
           brand={brand}
           price={price}
           quantity={quantity}
+          imgUrl={imgUrl}
           disabled={disable}
           id={id}
         />
@@ -66,7 +76,7 @@ const ItemPanel = function ({ id, stock, name, brand, price, initial, onAdd }) {
           size="small"
           fullWidth={true}
         >
-          Go to Checkout
+          Add to Cart
         </Button>
       ) : (
         ""

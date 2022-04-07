@@ -107,6 +107,7 @@ const Item = function ({
           name={name}
           brand={brand}
           price={price}
+          imgUrl={imgUrl}
           initial={initial}
           onAdd={addToCart}
           id={id}

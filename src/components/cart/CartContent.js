@@ -16,11 +16,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     display: "flex",
   },
-  cartTable: { borderCollapse: "collapse", width: "30%" },
+  cartTable: { borderCollapse: "collapse", width: "90%" },
   cartTableRowMain: { backgroundColor: "#333" },
-  cartTableCellMain: { color: "#fff !important" },
+  cartTableCellMain: { color: "#fff !important", textAlign: "center" },
   cartTableRowSec: { backgroundColor: "#555" },
-  cartTableCellSec: { color: "#fff !important" },
+  cartTableCellSec: { color: "#fff !important", textAlign: "center" },
+  prodImg: { width: "150px" },
   menuOption: {
     backgroundColor: "#777",
     color: "#FFF",
@@ -41,11 +42,7 @@ const CartContent = function () {
       <Table className={classes.cartTable}>
         <TableHead>
           <TableRow className={classes.cartTableRowMain}>
-            <TableCell
-              align="center"
-              colSpan={5}
-              className={classes.cartTableCellMain}
-            >
+            <TableCell colSpan={6} className={classes.cartTableCellMain}>
               Product
             </TableCell>
             <TableCell align="right" className={classes.cartTableCellMain}>
@@ -54,6 +51,7 @@ const CartContent = function () {
           </TableRow>
           <TableRow className={classes.cartTableRowSec}>
             <TableCell className={classes.cartTableCellSec}>Action</TableCell>
+            <TableCell className={classes.cartTableCellSec}>Photo</TableCell>
             <TableCell className={classes.cartTableCellSec}>Name</TableCell>
             <TableCell className={classes.cartTableCellSec}>Brand</TableCell>
             <TableCell className={classes.cartTableCellSec} align="right">
@@ -78,6 +76,13 @@ const CartContent = function () {
                   <Delete className={classes.CartButton} />
                 </IconButton>
               </TableCell>
+              <TableCell>
+                <img
+                  alt={item.name}
+                  className={classes.prodImg}
+                  src={item.imgUrl}
+                ></img>
+              </TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.brand}</TableCell>
               <TableCell align="right">{item.quantity}</TableCell>
@@ -88,11 +93,11 @@ const CartContent = function () {
             </TableRow>
           ))}
           <TableRow>
-            <TableCell colSpan={5}>Total</TableCell>
+            <TableCell colSpan={6}>Total</TableCell>
             <TableCell align="right">{total}</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell colSpan={6} align="center">
+            <TableCell colSpan={7} align="center">
               <Button
                 variant="text"
                 color="inherit"
