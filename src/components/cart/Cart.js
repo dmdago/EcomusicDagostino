@@ -7,7 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   cartCompContainer: {
-    justifyContent: "center",
+    marginTop: "10px",
+    justifyContent: "space-evenly",
     display: "flex",
   },
 }));
