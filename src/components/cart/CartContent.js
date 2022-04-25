@@ -32,11 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CartContent = function () {
+const CartContent = function (total) {
   const { items, removeItem, clear } = useCartContext();
   const classes = useStyles();
-  const aPrices = items.map((product) => product.price * product.quantity);
-  const total = aPrices.flat().reduce((acc, sum) => acc + sum);
 
   return (
     <TableContainer className={classes.cartTableContainer}>
@@ -95,7 +93,7 @@ const CartContent = function () {
           ))}
           <TableRow>
             <TableCell colSpan={6}>Total</TableCell>
-            <TableCell align="right">{total}</TableCell>
+            <TableCell align="right">{total.total}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell colSpan={7} align="center">

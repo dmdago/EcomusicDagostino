@@ -36,11 +36,9 @@ const useStyles = makeStyles((theme) => ({
   CardRow: { margin: "5px", display: "flex", flexWrap: "wrap" },
 }));
 
-const CartForm = function () {
+const CartForm = function (total) {
   const classes = useStyles();
   const { items } = useCartContext();
-  const aPrices = items.map((product) => product.price * product.quantity);
-  const total = aPrices.flat().reduce((acc, sum) => acc + sum);
   const [orderId, setOrderId] = useState([]);
 
   const sendOrder = async (e) => {
@@ -54,7 +52,7 @@ const CartForm = function () {
     const city = e.target.frmCity.value;
     const state = e.target.frmState.value;
     const country = e.target.frmCountry.value;
-
+    console.log(total);
     const oBuy = {
       buyer: {
         name,
@@ -69,7 +67,7 @@ const CartForm = function () {
       },
       items: { items },
       orderDate: Timestamp.fromDate(new Date()),
-      total,
+      total: total.total,
     };
 
     const cartItems = items.map((cartItem) => ({

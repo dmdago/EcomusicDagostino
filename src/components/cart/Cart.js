@@ -18,12 +18,17 @@ const Cart = function () {
   const classes = useStyles();
   const validItems = items && items.length > 0;
 
+  const aPrices = items.map((product) => product.price * product.quantity);
+  let total = 0;
+  if (aPrices.length > 0)
+    total = aPrices.flat().reduce((acc, sum) => acc + sum);
+
   return (
     <>
       {validItems ? (
         <div className={classes.cartCompContainer}>
-          <CartForm />
-          <CartContent />
+          <CartForm total={total} />
+          <CartContent total={total} />
         </div>
       ) : (
         <EmptyCart />
