@@ -52,7 +52,6 @@ const CartForm = function (total) {
     const city = e.target.frmCity.value;
     const state = e.target.frmState.value;
     const country = e.target.frmCountry.value;
-    console.log(total);
     const oBuy = {
       buyer: {
         name,

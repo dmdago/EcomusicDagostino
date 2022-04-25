@@ -79,15 +79,6 @@ const NavBar = () => {
           <div>
             <CartWidget />
           </div>
-          <div>
-            <Button
-              variant="text"
-              color="inherit"
-              className={`${classes.menuOptionSpecial}  ${classes.menuOption}`}
-            >
-              Login
-            </Button>
-          </div>
         </Toolbar>
       </AppBar>
       <div className={classes.offset}></div>

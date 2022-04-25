@@ -1,6 +1,12 @@
 # Proyecto Ecommerce Coder House
 
-Este proyecto es realizado como trabajo integrador del curso de React JS de Coder House.
+Este proyecto es realizado como trabajo integrador del curso de React JS de Coder House. Esta aplicacion web se conecta con el backend realizado con Firebase permitiendo navegar entre los diferentes productos y categorias, ver su detalle, agregarlos al carrito y realizar una compra.
+
+## Tecnologias
+
+- ReactJS
+- Material UI
+- Firebase
 
 ## Contenido
 
@@ -19,3 +25,11 @@ Para correr el proyecto se debe correr la siguiente linea por terminal en la rut
 ### `npm start`
 
 El puerto actual es el `23221`, el cual puedo modificarse en el archivo `package.json`
+
+## Demostracion
+
+![](Store.gif)
+
+## URL Produccion
+
+https://ecomusic-dagostino.vercel.app/
