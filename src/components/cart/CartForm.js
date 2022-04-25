@@ -17,6 +17,7 @@ import {
   query,
   where,
   getDocs,
+  writeBatch,
 } from "firebase/firestore";
 import OrderData from "../orders/OrderData";
 import db from "../../utils/firebase";
@@ -86,10 +87,13 @@ const CartForm = function () {
     );
     const itemsToUpdate = await getDocs(prodQuery);
     const prodsNoStock = [];
-
+    const batch = writeBatch(db);
     try {
       itemsToUpdate.docs.forEach((docSnapShot, idx) => {
         if (docSnapShot.data().stock >= cartItems[idx].quantity) {
+          batch.update(docSnapShot.ref, {
+            stock: docSnapShot.data().stock - cartItems[idx].quantity,
+          });
           console.log("actualiza cantidad");
         } else {
           prodsNoStock.push({ ...docSnapShot.data(), id: docSnapShot.id });
@@ -100,9 +104,14 @@ const CartForm = function () {
       console.log(err);
     }
 
-    const ordersCollection = collection(db, "orders");
-    const docDetails = await addDoc(ordersCollection, oBuy);
-    setOrderId(docDetails.id);
+    if (prodsNoStock.length === 0) {
+      await batch.commit();
+      const ordersCollection = collection(db, "orders");
+      const docDetails = await addDoc(ordersCollection, oBuy);
+      setOrderId(docDetails.id);
+    } else {
+      setOrderId(0);
+    }
   };
 
   return (

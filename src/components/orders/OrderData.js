@@ -19,7 +19,11 @@ function OrderData({ orderId }) {
       </p>
     </div>
   ) : (
-    ""
+    <div className={classes.OrderId}>
+      <p>
+        <b>Your order has products without stock, please review it.</b>
+      </p>
+    </div>
   );
 }
 
