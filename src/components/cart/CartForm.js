@@ -94,10 +94,8 @@ const CartForm = function () {
           batch.update(docSnapShot.ref, {
             stock: docSnapShot.data().stock - cartItems[idx].quantity,
           });
-          console.log("actualiza cantidad");
         } else {
           prodsNoStock.push({ ...docSnapShot.data(), id: docSnapShot.id });
-          console.log("no alcanza stock");
         }
       });
     } catch (err) {
@@ -110,7 +108,7 @@ const CartForm = function () {
       const docDetails = await addDoc(ordersCollection, oBuy);
       setOrderId(docDetails.id);
     } else {
-      setOrderId(0);
+      setOrderId(false);
     }
   };
 

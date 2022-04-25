@@ -12,17 +12,25 @@ const useStyles = makeStyles((theme) => ({
 
 function OrderData({ orderId }) {
   const classes = useStyles();
-  return orderId.length > 0 ? (
-    <div className={classes.OrderId}>
-      <p>
+  let message = "";
+
+  if (orderId.length > 0) {
+    message = (
+      <>
         Your order was generated with the following id: <b>{orderId}</b>
-      </p>
-    </div>
-  ) : (
-    <div className={classes.OrderId}>
-      <p>
+      </>
+    );
+  } else if (orderId === false) {
+    message = (
+      <>
         <b>Your order has products without stock, please review it.</b>
-      </p>
+      </>
+    );
+  }
+
+  return (
+    <div className={classes.OrderId}>
+      <p>{message}</p>
     </div>
   );
 }
