@@ -9,7 +9,15 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCartContext } from "./CartContext.js";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  Timestamp,
+  documentId,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import OrderData from "../orders/OrderData";
 import db from "../../utils/firebase";
 
@@ -22,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-evenly",
   },
-  InputText: { flex: 1 },
-  CardRow: { flex: 1, flexDirection: "row", margin: "5px" },
+  InputText: { margin: "5px", flex: "0 0 45%" },
+  SubmitButton: { margin: "5px" },
+  CardRow: { margin: "5px", display: "flex", flexWrap: "wrap" },
 }));
 
 const CartForm = function () {
@@ -43,6 +52,7 @@ const CartForm = function () {
     const postalcode = e.target.frmPostalCode.value;
     const city = e.target.frmCity.value;
     const state = e.target.frmState.value;
+    const country = e.target.frmCountry.value;
 
     const oBuy = {
       buyer: {
@@ -54,11 +64,41 @@ const CartForm = function () {
         postalcode,
         city,
         state,
+        country,
       },
       items: { items },
       orderDate: Timestamp.fromDate(new Date()),
       total,
     };
+
+    const cartItems = items.map((cartItem) => ({
+      id: cartItem.productId,
+      quantity: cartItem.quantity,
+    }));
+    const prodRef = collection(db, "products");
+    const prodQuery = query(
+      prodRef,
+      where(
+        documentId(),
+        "in",
+        cartItems.map((i) => i.id)
+      )
+    );
+    const itemsToUpdate = await getDocs(prodQuery);
+    const prodsNoStock = [];
+
+    try {
+      itemsToUpdate.docs.forEach((docSnapShot, idx) => {
+        if (docSnapShot.data().stock >= cartItems[idx].quantity) {
+          console.log("actualiza cantidad");
+        } else {
+          prodsNoStock.push({ ...docSnapShot.data(), id: docSnapShot.id });
+          console.log("no alcanza stock");
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     const ordersCollection = collection(db, "orders");
     const docDetails = await addDoc(ordersCollection, oBuy);
@@ -74,43 +114,78 @@ const CartForm = function () {
       <CardContent className={classes.CardContent}>
         <form onSubmit={sendOrder}>
           <div className={classes.CardRow}>
-            <TextField required id="frmName" name="frmName" label="Name" />
-            <TextField required id="frmEmail" name="frmEmail" label="Email" />
+            <TextField
+              required
+              id="frmName"
+              name="frmName"
+              label="Name"
+              className={classes.InputText}
+            />
             <TextField
               required
               id="frmLastname"
               name="frmLastname"
               label="Lastname"
+              className={classes.InputText}
             />
-          </div>
-          <div className={classes.CardRow}>
+            <TextField
+              required
+              id="frmEmail"
+              name="frmEmail"
+              label="Email"
+              className={classes.InputText}
+            />
+            <TextField
+              required
+              id="frmPhone"
+              name="frmPhone"
+              label="Phone"
+              className={classes.InputText}
+            />
             <TextField
               required
               id="frmAddress"
               name="frmAddress"
               label="Address"
+              className={classes.InputText}
             />
-            <TextField required id="frmPhone" name="frmPhone" label="Phone" />
             <TextField
               required
               id="frmPostalCode"
               name="frmPostalCode"
               label="Postal Code"
+              className={classes.InputText}
+            />
+            <TextField
+              required
+              id="frmCity"
+              name="frmCity"
+              label="City"
+              className={classes.InputText}
+            />
+            <TextField
+              required
+              id="frmState"
+              name="frmState"
+              label="State"
+              className={classes.InputText}
+            />
+            <TextField
+              required
+              id="frmCountry"
+              name="frmCountry"
+              label="Country"
+              className={classes.InputText}
             />
           </div>
-          <div className={classes.CardRow}>
-            <TextField required id="frmCity" name="frmCity" label="City" />
-            <TextField required id="frmState" name="frmState" label="State" />
-            <div className={classes.CardRow}></div>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Buy
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.SubmitButton}
+          >
+            Buy
+          </Button>
         </form>
       </CardContent>
       <OrderData orderId={orderId} />
